@@ -1,0 +1,91 @@
+
+
+
+
+<!DOCTYPE html> 
+
+<html> 
+	<head> 
+		<title>For loop in Flask</title> 
+
+	
+		<!-- Adding some style to table (OPTIONAL) -->
+		<style type="text/css"> 
+			
+			th:tr{ 
+				color: blue; 
+		
+			} 
+			tr:nth-of-type(2n){ 
+				border: 1px solid black; 
+				background-color: rgba(150, 150, 150, 0.5); 
+		
+			} 
+		
+			td{ 
+				padding: 8px 8px; 
+				border: 1px solid black; 
+			} 
+		</style> 
+	</head>
+	<body> 
+	
+	    <p>Result </p>
+
+        <div>
+            {{ collectionNames }} 
+        </div>
+
+		<table> 
+			<!-- Table headers -->
+			
+			<th> 
+				<tr style="color: green; ">	 
+					<td>title</td> 
+					<td>Genres (array)</td> 
+					<td>Awards (Objects)</td>
+					<td>Tomatoes - viewer (Object within an Object)</td>
+				</tr> 
+			</th> 
+			
+			
+			{%for i in movieInfo%} 
+			
+			<!-- table rows -->
+				<tr> 
+					<td>{{i['title']}}</td> 
+					<td>
+					    <!-- genres -->
+					    <ul>
+					        {%for g in i['genres'] %}
+					            <li> {{ g }}</li>
+					        {%endfor%}
+					    </ul>
+					</td>
+					<td>
+					    <!-- Awards -->
+					    <ul>
+					        {% for attribute in i['awards'] %}
+                                <li>{{ attribute }} : {{ i['awards'][attribute] }}</li>
+                            {% endfor %}
+					    </ul>
+					</td>
+					<td>
+					    <!-- Tomatoes - Viewer -->
+					    <ul>
+					        {% for attribute in i['tomatoes']['viewer'] %}
+                                <li>{{ attribute }} : {{ i['tomatoes']['viewer'][attribute] }}</li>
+                            {% endfor %}
+					    </ul>
+					</td>
+			
+			{%endfor%} 
+			
+			</tr> 
+		
+		</table> 
+	
+	
+	</body> 
+</html> 
+

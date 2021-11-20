@@ -1,0 +1,97 @@
+
+
+
+
+<!DOCTYPE html> 
+
+<html> 
+	<head> 
+		<title>Data2 Template</title> 
+
+	
+		<!-- Adding some style to table (OPTIONAL) -->
+		<style type="text/css"> 
+			
+			th:tr{ 
+				color: blue; 
+		
+			} 
+			tr:nth-of-type(2n){ 
+				border: 1px solid black; 
+				background-color: rgba(150, 150, 150, 0.5); 
+		
+			} 
+		
+			td{ 
+				padding: 8px 8px; 
+				border: 1px solid black; 
+			} 
+		</style> 
+	</head>
+	<body> 
+	
+	    <p>Result </p>
+
+        <div>
+            {{ collectionNames }} 
+        </div>
+
+		<table> 
+			<!-- Table headers -->
+			
+			<th> 
+				<tr style="color: green; ">	 
+					<td>title</td> 
+					<td>Genres (array)</td> 
+					<td>Awards (Objects)</td>
+					<td>Tomatoes - viewer (Object within an Object)</td>
+				</tr> 
+			</th> 
+			
+			
+			{%for mc in movieCollection%} 
+				
+			<!-- table rows -->
+				<tr> 
+					<td> {{ mc['title'] }} </td>
+					<td>
+						<!-- genres -->
+						<ul>
+							{%for g in mc['genres'] %}
+						    	<li> {{ g }}</li>
+						    {%endfor%}
+						</ul>
+					</td>
+					<td>
+						<!-- Awards -->
+						<ul>
+							{% for attribute in mc['awards'] %}
+	                        	<li>{{ attribute }} : {{ mc['awards'][attribute] }}</li>
+	                        {% endfor %}
+						</ul>
+					</td>
+					<td>
+						
+						<ul>
+							{% if 'tomatoes' in mc %}
+								{% for attribute in mc['tomatoes']['viewer'] %}
+		                        	<li>{{ attribute }} : {{ mc['tomatoes']['viewer'][attribute] }}</li>
+		                        {% endfor %}
+		                    {% else %}
+								<li> No entries </li>
+							{% endif %}
+						</ul>
+						
+					</td>
+				</tr>
+			
+			
+			{% endfor %} 
+			
+		
+		</table> 
+	
+	
+	</body> 
+</html> 
+

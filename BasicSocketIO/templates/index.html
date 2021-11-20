@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Flask SocketIO Demo</title>
+    <style>
+        .newspaper {
+            -webkit-column-count: 3; /* Chrome, Safari, Opera */
+            -moz-column-count: 3; /* Firefox */
+            column-count: 3;
+        }
+        .head {
+            text-align: center;
+        }
+    </style>
+    <link rel="shortcut icon" href="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    
+    
+    <script>
+         
+
+        $(document).ready(function() {
+            let loc = window.location.href
+        
+            let socket = io(loc);
+        
+            socket.on('notification', function(value){
+                $("#result").html(value)
+            });
+            
+            
+            $("#send_name").on('click', () => {
+                let name = $('#username').val() ; // this gets the username entered by the user
+                socket.emit('username',name) ;    // sends the username to the server
+            })
+            
+            $("#send_private").on('click', () => {
+                let to_name = $('#to').val() ; // this gets the name (receiver)
+                let msg = $('#msg').val() ; 
+                socket.emit('private_msg',{"to":to_name, "message": msg}) ;    // sends the username to the server
+            })
+            
+            
+        });
+     </script>
+    
+
+        
+  </head>
+  <body>
+      <h2>Flask SocketIO Demo</h2>
+      <input type="text" id="username" placeholder="enter username you want" style="width:200px" > <button id="send_name"> Submit name</button><p></p>
+      <hr>
+      <input type="text" id="to" placeholder="sending to ?">
+      <input type="text" id="msg" placeholder="what's the message">
+      <button id="send_private"> Submit private message</button>
+    
+      <hr><hr>
+      <div id="result">
+          
+      </div>
+  </body>
+</html>
