@@ -19,7 +19,7 @@ socketio = SocketIO(app)
 users = {}
 
 #app.config["MONGO_URI"] = "mongodb+srv://myuser:mypassword@cluster0-34sac.mongodb.net/sample_mflix?retryWrites=true&w=majority" # replace the URI with your own connection
-app.config["MONGO_URI"] = "mongodb+srv://rebecca96dmello:9881411765rmD#@cluster0.20egu.mongodb.net/sample_mflix?ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority" # replace the URI with your own connection
+app.config["MONGO_URI"] = "mongodb+srv://username#@cluster0.20egu.mongodb.net/collectionname?ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority" # replace the URI with your own connection
 mongo = PyMongo(app)
 
 
@@ -73,4 +73,4 @@ def getData():
     return mongo.db.movies.find({}).limit(1)
     
 if __name__ == '__main__':
-    socketio.run(app,host = '10.0.0.126')  # here, we are using socketio instaead of app because it has more features
+    socketio.run(app,host = '0.0.0.0')  # IP address - here, we are using socketio instaead of app because it has more features
